@@ -19,6 +19,7 @@ FIND_PATH(ENet_INCLUDE_DIRS enet/enet.h
     $ENV{ENETDIR}
     /usr/local
     /usr
+    /usr/include
     PATH_SUFFIXES include
     )
 
@@ -28,6 +29,8 @@ FIND_LIBRARY(ENet_LIBRARY
     $ENV{ENETDIR}
     /usr/local
     /usr
+	/usr/lib
+  /usr/lib/x86_64-linux-gnu
     PATH_SUFFIXES lib
     )
 

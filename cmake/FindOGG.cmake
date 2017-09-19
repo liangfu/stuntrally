@@ -22,6 +22,7 @@ FIND_PATH(OGG_INCLUDE_DIRS
 	/Library/Frameworks
 	/usr/local
 	/usr
+	/usr/include
 	/sw # Fink
 	/opt/local # DarwinPorts
 	/opt/csw # Blastwave
@@ -40,6 +41,8 @@ FIND_LIBRARY(OGG_LIBRARIES
 	/Library/Frameworks
 	/usr/local
 	/usr
+	/usr/lib
+  /usr/lib/x86_64-linux-gnu
 	/sw
 	/opt/local
 	/opt/csw
@@ -58,6 +61,8 @@ FIND_LIBRARY(OGG_LIBRARIES_DEBUG
 	/Library/Frameworks
 	/usr/local
 	/usr
+	/usr/lib
+  /usr/lib/x86_64-linux-gnu
 	/sw
 	/opt/local
 	/opt/csw

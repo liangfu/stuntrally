@@ -35,6 +35,7 @@ set(SOURCE_FILES
 
 include_directories(${Boost_INCLUDE_DIRS})
 add_definitions(-DBOOST_ALL_NO_LIB)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 add_library(${SHINY_LIBRARY} ${SHINY_LIBRARY_TYPE} ${SOURCE_FILES})
 if(BUILD_SHARED_LIBS)
     target_link_libraries(${SHINY_LIBRARY} ${Boost_LIBRARIES})

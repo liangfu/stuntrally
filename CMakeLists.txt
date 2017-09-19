@@ -10,7 +10,6 @@ option(BUILD_EDITOR           "Build the track editor."   ON)
 # Allow disabling master server building
 option(BUILD_MASTER_SERVER    "Build the master server."  OFF)
 
-
 # Avoid source tree pollution
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
 	message(FATAL_ERROR "In-source builds are not permitted. Make a separate folder for building:\nmkdir build; cd build; cmake ..\nBefore that, remove the files already created:\nrm -rf CMakeCache.txt CMakeFiles")

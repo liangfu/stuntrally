@@ -83,6 +83,7 @@ if (WIN32)
   set(OGRE_PREFIX_GUESSES
     ${ENV_PROGRAMFILES}/OGRE
     C:/OgreSDK
+    /usr/include/OGRE /usr/include
   )
 elseif (UNIX)
   set(OGRE_PREFIX_GUESSES
@@ -95,6 +96,7 @@ elseif (UNIX)
     $ENV{HOME}/ogre
     $ENV{HOME}/OGRE
   )
+  set(OGRE_INCLUDE_DIR /usr/include/OGRE)
   if (APPLE)
     set(OGRE_PREFIX_GUESSES 
       ${CMAKE_CURRENT_SOURCE_DIR}/lib/macosx
@@ -104,7 +106,7 @@ elseif (UNIX)
 endif ()
 set(OGRE_PREFIX_PATH
   ${OGRE_HOME} ${OGRE_SDK} ${ENV_OGRE_HOME} ${ENV_OGRE_SDK}
-  ${OGRE_PREFIX_GUESSES}
+  ${OGRE_PREFIX_GUESSES} /usr/include/OGRE /usr/include
 )
 create_search_paths(OGRE)
 # If both OGRE_BUILD and OGRE_SOURCE are set, prepare to find Ogre in a build dir
@@ -228,7 +230,10 @@ endif ()
 
 set(OGRE_INCLUDE_DIR ${OGRE_CONFIG_INCLUDE_DIR} ${OGRE_INCLUDE_DIR})
 list(REMOVE_DUPLICATES OGRE_INCLUDE_DIR)
-findpkg_finish(OGRE)
+# findpkg_finish(OGRE)
+set(OGRE_FOUND TRUE)
+message("OGRE_INCLUDE_DIR=${OGRE_INCLUDE_DIR}")
+
 add_parent_dir(OGRE_INCLUDE_DIRS OGRE_INCLUDE_DIR)
 if (OGRE_SOURCE)
 	# If working from source rather than SDK, add samples include
@@ -412,6 +417,8 @@ ogre_find_component(Volume OgreVolumePrerequisites.h)
 # look for Overlay component
 ogre_find_component(Overlay OgreOverlaySystem.h)
 
+message("OGRE_Overlay_INCLUDE_DIR=${OGRE_Overlay_INCLUDE_DIR}")
+
 #########################################################
 # Find Ogre plugins
 #########################################################        
@@ -578,3 +585,11 @@ clear_if_changed(OGRE_PREFIX_WATCH OGRE_MEDIA_DIR)
 find_path(OGRE_MEDIA_DIR NAMES packs/cubemapsJS.zip HINTS ${OGRE_MEDIA_SEARCH_PATH}
   PATHS ${OGRE_PREFIX_PATH} PATH_SUFFIXES ${OGRE_MEDIA_SEARCH_SUFFIX})
 
+message("OGRE_COMPONENTS=${OGRE_COMPONENTS}")
+set(OGRE_INCLUDE_DIRS ${OGRE_INCLUDE_DIRS} ${OGRE_INCLUDE_DIR})
+foreach(comp ${OGRE_COMPONENTS})
+  set(OGRE_INCLUDE_DIRS ${OGRE_INCLUDE_DIRS} ${OGRE_INCLUDE_DIR}/${comp})
+endforeach()
+set(OGRE_LIBRARIES OgrePaging OgreTerrain OgreVolume OgreOverlay OgreMain)
+message("OGRE_INCLUDE_DIRS=${OGRE_INCLUDE_DIRS}")
+message("OGRE_LIBRARIES=${OGRE_LIBRARIES}")
